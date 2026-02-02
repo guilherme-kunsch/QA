@@ -11,7 +11,7 @@
     "open": "cypress open"
   },
   "dependencies": {
-    "cypress": "^3.6.0"
-  },
-  "devDependencies": {}
+    "cypress": "^3.6.0",
+    "cypress-xpath": "^2.0.1"
+  }
 }
