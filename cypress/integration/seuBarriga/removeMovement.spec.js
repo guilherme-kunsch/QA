@@ -1,6 +1,6 @@
 /*
-Funcionalidade: Inserir uma conta
-Tela: Login
+Funcionalidade: Remover uma movimentação
+Tela: Movimentação
 URL: https://barrigareact.wcaquino.me/
 */
 
@@ -25,22 +25,11 @@ describe('Insert account', () => {
         cy.get('.toast-message').should('contain', 'Bem vindo')
     })
 
-    it('Change account', () => {
-        cy.get('[data-test=menu-settings]').click()
-        cy.get('[href="/contas"]')
-            .should('be.visible')
-            .click()
-        cy.get('tr > :nth-child(2) > :nth-child(1) > .far').click()
+    it('Deve remover uma movimentação', () => {
+        cy.get('[data-test=menu-extrato]').click()
+        cy.get(':nth-child(1) > .row > .col > [href="#"] > .far').click()
 
+        cy.get('.toast-message').should('contain', 'Movimentação removida')
 
-        cy.get('[data-test=nome]').clear()
-        cy.get('[data-test=nome]')
-            .type('Nova conta2')
-            .should('have.value', 'Nova conta2')
-
-
-        cy.get('.btn').click()
-
-        cy.get
     })
 })

@@ -22,6 +22,7 @@ describe('Insert account', () => {
             .should('have.value', '123456')
 
         cy.get('.btn').click()
+        cy.get('.toast-message').should('contain', 'Bem vindo')
     })
 
     it('Insert repeat account', () => {

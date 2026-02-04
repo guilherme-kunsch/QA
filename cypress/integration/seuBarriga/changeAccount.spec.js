@@ -14,16 +14,16 @@ describe('Insert account', () => {
 
   it('Deve acessar a página inicial', () => {
     cy.get('[data-test=email]')
-        .click()
-        .type('guilhermekunsch@ucl.br')
-        .should('have.value', 'guilhermekunsch@ucl.br')
+      .type('guilhermekunsch@ucl.br')
+      .should('have.value', 'guilhermekunsch@ucl.br')
 
     cy.get('[data-test=passwd]')
-        .click()    
-        .type('123456')
-        .should('have.value', '123456')
-    
+      .type('123456')
+      .should('have.value', '123456')
+
+
     cy.get('.btn').click()
+    cy.get('.toast-message').should('contain', 'Bem vindo')
   })
 
 })
