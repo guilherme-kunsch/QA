@@ -15,8 +15,22 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import loc from './locators'
 
 require('cypress-xpath')
+
+Cypress.Commands.add('login', (user, passwd) => {
+    cy.get(loc.LOGIN.USER)
+        .type('guilhermekunsch@ucl.br')
+        .should('have.value', 'guilhermekunsch@ucl.br')
+
+    cy.get(loc.LOGIN.PASSWORD)
+        .type('123456')
+        .should('have.value', '123456')
+
+    cy.get(loc.LOGIN.BTN_LOGIN).click()
+    cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
+})
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

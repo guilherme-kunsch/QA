@@ -15,16 +15,7 @@ describe('Insert account', () => {
     })
 
     it('Deve acessar a página inicial', () => {
-        cy.get(loc.LOGIN.USER)
-            .type('guilhermekunsch@ucl.br')
-            .should('have.value', 'guilhermekunsch@ucl.br')
-
-        cy.get(loc.LOGIN.PASSWORD)
-            .type('123456')
-            .should('have.value', '123456')
-
-        cy.get(loc.LOGIN.BTN_LOGIN).click()
-        cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
+        cy.login('guilherme.kunsch@outlook.com', '123456')
     })
 
     it('Insert repeat account', () => {
