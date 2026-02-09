@@ -6,6 +6,8 @@ URL: https://barrigareact.wcaquino.me/
 
 /// <reference types="cypress" />
 
+import loc from '../../support/locators'
+
 describe('Insert account', () => {
 
     before(() => {
@@ -13,21 +15,21 @@ describe('Insert account', () => {
     })
 
     it('Deve acessar a página inicial', () => {
-        cy.get('[data-test=email]')
+        cy.get(loc.LOGIN.USER)
             .type('guilhermekunsch@ucl.br')
             .should('have.value', 'guilhermekunsch@ucl.br')
 
-        cy.get('[data-test=passwd]')
+        cy.get(loc.LOGIN.PASSWORD)
             .type('123456')
             .should('have.value', '123456')
 
-        cy.get('.btn').click()
-        cy.get('.toast-message').should('contain', 'Bem vindo')
+        cy.get(loc.LOGIN.BTN_LOGIN).click()
+        cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
     })
 
     it('Change account', () => {
-        cy.get('[data-test=menu-settings]').click()
-        cy.get('[href="/contas"]')
+        cy.get(loc.MENU.SETTINGS).click()
+        cy.get(loc.MENU.CONTAS)
             .should('be.visible')
             .click()
         cy.get('tr > :nth-child(2) > :nth-child(1) > .far').click()
@@ -39,8 +41,7 @@ describe('Insert account', () => {
             .should('have.value', 'Nova conta2')
 
 
-        cy.get('.btn').click()
+        cy.get(loc.LOGIN.BTN_LOGIN).click()
 
-        cy.get
     })
 })

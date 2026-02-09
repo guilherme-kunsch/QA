@@ -6,6 +6,8 @@ URL: https://barrigareact.wcaquino.me/
 
 /// <reference types="cypress" />
 
+import loc from '../../support/locators'
+
 describe('Insert account', () => {
 
     before(() => {
@@ -13,16 +15,16 @@ describe('Insert account', () => {
     })
 
     it('Deve acessar a página inicial', () => {
-        cy.get('[data-test=email]')
+        cy.get(loc.LOGIN.USER)
             .type('guilhermekunsch@ucl.br')
             .should('have.value', 'guilhermekunsch@ucl.br')
 
-        cy.get('[data-test=passwd]')
+        cy.get(loc.LOGIN.PASSWORD)
             .type('123456')
             .should('have.value', '123456')
 
-        cy.get('.btn').click()
-        cy.get('.toast-message').should('contain', 'Bem vindo')
+        cy.get(loc.LOGIN.BTN_LOGIN).click()
+        cy.get(loc.MESSAGE).should('contain', 'Bem vindo')
     })
 
     it('Insert repeat account', () => {
