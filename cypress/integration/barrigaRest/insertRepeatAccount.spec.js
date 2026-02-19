@@ -12,20 +12,21 @@ describe("Realizando testes na API", () => {
     cy.resetRest();
   });
 
-  it("Deve criar uma conta", () => {
+  it("Não deve criar uma conta repetida", () => {
     cy.request({
       url: "/contas",
       method: "POST",
       headers: { Authorization: `JWT ${token}` },
       body: {
-        nome: "Cteste2",
+        nome: "Conta mesmo nome",
       },
+      failOnStatusCode: false,
     }).as("response");
 
     cy.get("@response").then((res) => {
-      expect(res.status).to.equal(201);
-      expect(res.body).to.have.property("id");
-      expect(res.body).to.have.property("nome", "Cteste2");
+      console.log(res);
+      expect(res.status).to.equal(400);
+      expect(res.body.error).to.be.equal("Ja existe uma conta com esse nome!");
     });
   });
 });
