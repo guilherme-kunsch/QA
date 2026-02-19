@@ -1,0 +1,37 @@
+/// <reference types="cypress" />
+
+describe("Realizando testes na API", () => {
+  let token;
+  before(() => {
+    cy.getToken("guilhermekunsch@ucl.br", "123456").then((tkn) => {
+      token = tkn;
+    });
+  });
+
+  beforeEach(() => {
+    cy.resetRest();
+  });
+  it("Deve alterar uma conta", () => {
+    cy.request({
+      method: "GET",
+      url: "/contas",
+      headers: { Authorization: `JWT ${token}` },
+      qs: {
+        nome: "Conta para alterar",
+      },
+    })
+      .then((res) => {
+        return cy.request({
+          method: "PUT",
+          url: `/contas/${res.body[0].id}`,
+          headers: { Authorization: `JWT ${token}` },
+          body: {
+            nome: "alterando via api",
+          },
+        });
+      })
+      .then((res) => {
+        expect(res.status).to.equal(200);
+      });
+  });
+});

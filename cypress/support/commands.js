@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 Cypress.Commands.add("getToken", (user, passwd) => {
   cy.request({
-    url: "https://barrigarest.wcaquino.me/signin",
+    url: "/signin",
     method: "POST",
     body: {
       email: user,
@@ -43,8 +43,10 @@ Cypress.Commands.add("resetRest", () => {
   cy.getToken("guilhermekunsch@ucl.br", "123456").then((token) => {
     cy.request({
       method: "GET",
-      url: "https://barrigarest.wcaquino.me/reset",
+      url: "/reset",
       headers: { Authorization: `JWT ${token}` },
-    });
+    })
+      .its("status")
+      .should("be.equal", 200);
   });
 });
