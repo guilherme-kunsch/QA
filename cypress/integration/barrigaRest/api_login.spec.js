@@ -4,7 +4,7 @@ describe("Realizando testes na API", () => {
   it("Deve realizar o login", () => {
     cy.request({
       method: "POST",
-      url: "https://barrigarest.wcaquino.me/signin",
+      url: "/signin",
       body: {
         email: "guilhermekunsch@ucl.br",
         senha: "123456",

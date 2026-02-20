@@ -50,3 +50,18 @@ Cypress.Commands.add("resetRest", () => {
       .should("be.equal", 200);
   });
 });
+
+Cypress.Commands.add("getAccountByName", (name) => {
+  cy.getToken("guilhermekunsch@ucl.br", "123456").then((token) => {
+    cy.request({
+      method: "GET",
+      url: "/contas",
+      headers: { Authorization: `JWT ${token}` },
+      qs: {
+        nome: name,
+      },
+    }).then((res) => {
+      return res.body[0].id;
+    });
+  });
+});
