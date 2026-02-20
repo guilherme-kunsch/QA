@@ -1,11 +1,8 @@
 /// <reference types="cypress" />
 
 describe("Testando a API", () => {
-  let token;
   before(() => {
-    cy.getToken("guilhermekunsch@ucl.br", "123456").then((tkn) => {
-      token = tkn;
-    });
+    cy.getToken("guilhermekunsch@ucl.br", "123456");
   });
 
   beforeEach(() => {
@@ -17,7 +14,6 @@ describe("Testando a API", () => {
       cy.request({
         url: "/transacoes",
         method: "POST",
-        headers: { Authorization: `JWT ${token}` },
         body: {
           conta_id: contaId,
           data_pagamento: Cypress.moment()

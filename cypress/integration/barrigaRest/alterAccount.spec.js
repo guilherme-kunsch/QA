@@ -1,11 +1,8 @@
 /// <reference types="cypress" />
 
 describe("Realizando testes na API", () => {
-  let token;
   before(() => {
-    cy.getToken("guilhermekunsch@ucl.br", "123456").then((tkn) => {
-      token = tkn;
-    });
+    cy.getToken("guilhermekunsch@ucl.br", "123456");
   });
 
   beforeEach(() => {
@@ -15,7 +12,6 @@ describe("Realizando testes na API", () => {
     cy.request({
       method: "GET",
       url: "/contas",
-      headers: { Authorization: `JWT ${token}` },
       qs: {
         nome: "Conta para alterar",
       },
@@ -24,7 +20,6 @@ describe("Realizando testes na API", () => {
         return cy.request({
           method: "PUT",
           url: `/contas/${res.body[0].id}`,
-          headers: { Authorization: `JWT ${token}` },
           body: {
             nome: "alterando via api",
           },
